@@ -17,7 +17,7 @@ const createBankAccount = async (req, res) => {
         let number = uuidv4()
         let balance = 0
         let encryptedPassword = await bcrypt.hash(senha, 10)
-        let account = { numero: number, saldo: balance, senha: encryptedPassword, usuario: { ...req.body } }
+        let account = { numero: number, saldo: balance, usuario: { ...req.body, senha: encryptedPassword } }
 
         arrayDatabase[0].contas.push(account)
         let stringDatabase = JSON.stringify(arrayDatabase)
