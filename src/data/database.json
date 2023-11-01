@@ -6,21 +6,7 @@
       "agencia": "0001",
       "senha": "Cubos123Bank"
     },
-    "contas": [
-      {
-        "numero": "56f220c6-6746-47cd-bf00-cecf8cdccbb1",
-        "saldo": 0,
-        "senha": "$2b$10$/kT8vc23qT0lQMoYeJBRn.zsfmcpc8D6OHiyup.CrDbPC2gBNShuW",
-        "usuario": {
-          "nome": "Foo Bar 2",
-          "cpf": "00011122234",
-          "data_nascimento": "2021-03-15",
-          "telefone": "71999998888",
-          "email": "foo@bar2.com",
-          "senha": "12345"
-        }
-      }
-    ],
+    "contas": [],
     "saques": [],
     "depositos": [],
     "transferencias": []
