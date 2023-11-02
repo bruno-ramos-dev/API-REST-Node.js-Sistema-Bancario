@@ -54,8 +54,31 @@ const updateUserBankAccount = async (req, res) => {
     }
 }
 
+const deleteAccount = async (req, res) => {
+
+    const { numeroConta } = req.params
+
+    try {
+
+        const account = arrayDatabase[0].contas.find(account => account.numero === numeroConta)
+        if (account.saldo !== 0) return res.status(403).json({ mensagem: 'A sua conta possui saldo. Saque todo o valor antes de excluir a conta!' })
+
+        const filteredDatabase = arrayDatabase[0].contas.filter(account => account.numero !== numeroConta)
+        arrayDatabase[0].contas = filteredDatabase
+
+        let stringDatabase = JSON.stringify(arrayDatabase)
+        writeFile('src/data/database.json', stringDatabase)
+
+        return res.status(204).json()
+        
+    } catch (error) {
+        return res.status(400).json({ mensagem: `Erro no servidor ${error.message}` })
+    }
+}
+
 module.exports = {
     listBankAccounts, 
     createBankAccount, 
-    updateUserBankAccount
+    updateUserBankAccount, 
+    deleteAccount
 }
