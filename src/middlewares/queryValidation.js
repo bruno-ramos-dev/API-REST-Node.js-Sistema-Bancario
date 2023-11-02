@@ -3,7 +3,7 @@ const validationRequisitionQuery = validationsSchema => async (req, res, next) =
         await validationsSchema.validateAsync(req.query)
         next()
     } catch (error) {
-        return res.status(500).json({ mensagem: error.message })
+        return res.status(400).json({ mensagem: error.message })
     }
 } 
 

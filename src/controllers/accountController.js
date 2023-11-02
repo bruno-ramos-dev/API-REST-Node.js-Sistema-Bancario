@@ -89,10 +89,42 @@ const balance = async (req, res) => {
     }
 }
 
+const invoice = async (req, res) => {
+
+    try {
+
+        const { numero_conta } = req.query
+
+        let withdraws = []
+        let deposits = []
+        let sendtransfers = []
+        let receivedTransfers = []
+
+        withdraws = arrayDatabase[0].saques.filter(account => account.numero_conta === numero_conta)
+        deposits = arrayDatabase[0].depositos.filter(account => account.numero_conta === numero_conta)
+
+        arrayDatabase[0].transferencias.forEach(transfer => {
+            if (transfer.numero_conta_origem === numero_conta) {
+                sendtransfers.push(transfer)
+            } else if (transfer.numero_conta_destino === numero_conta) {
+                receivedTransfers.push(transfer)
+            }
+        })
+
+        const invoice = { depositos: deposits, saques: withdraws, transferenciasEnviadas: sendtransfers, transferenciasRecebidas: receivedTransfers }
+
+        return res.json(invoice)
+        
+    } catch (error) {
+        return res.status(500).json({ mensagem: `Erro no servidor ${error.message}` })
+    }
+}
+
 module.exports = {
     listBankAccounts, 
     createBankAccount, 
     updateUserBankAccount, 
     deleteBankAccount, 
-    balance
+    balance, 
+    invoice
 }
