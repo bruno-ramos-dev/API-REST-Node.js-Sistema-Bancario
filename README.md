@@ -215,7 +215,7 @@ Esse endpoint atualiza apenas os dados do usuário de uma conta bancária.
 }
 ```
 
-### Excluir Conta
+### Excluir Conta Bancária
 
 #### `DELETE` `/contas/:numeroConta`
 

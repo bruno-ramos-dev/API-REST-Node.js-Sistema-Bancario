@@ -54,7 +54,7 @@ const updateUserBankAccount = async (req, res) => {
     }
 }
 
-const deleteAccount = async (req, res) => {
+const deleteBankAccount = async (req, res) => {
 
     const { numeroConta } = req.params
 
@@ -80,5 +80,5 @@ module.exports = {
     listBankAccounts, 
     createBankAccount, 
     updateUserBankAccount, 
-    deleteAccount
+    deleteBankAccount
 }
