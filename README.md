@@ -159,3 +159,58 @@ Esse endpoint cria uma conta bancária, onde será gerado um número único para
     "mensagem": "Já existe uma conta com o cpf ou e-mail informado!"
 }
 ```
+
+### Atualizar usuário da conta bancária
+
+#### `PUT` `/contas/:numeroConta/usuario`
+
+Esse endpoint atualiza apenas os dados do usuário de uma conta bancária.
+
+-   Requisitos **OBRIGATÓRIOS**:
+
+    -   Verificar se todos os campos no body da requisição foram passados
+    -   Verificar se o numero da conta passado como parametro na URL é válida
+    -   Se o CPF for informado, verificar se já existe outro registro com o mesmo CPF
+    -   Se o E-mail for informado, verificar se já existe outro registro com o mesmo E-mail
+    -   Atualizar os dados do usuário de uma conta bancária
+
+-   **Requisição** - O corpo (body) deverá possuir um objeto com todas as seguintes propriedades (respeitando estes nomes):
+
+    -   nome
+    -   cpf
+    -   data_nascimento
+    -   telefone
+    -   email
+    -   senha
+
+-   **Resposta**
+
+    Em caso de **sucesso**, não deveremos enviar conteúdo no corpo (body) da resposta.  
+    Em caso de **falha na validação**, a resposta deverá possuir ***status code*** apropriado, e em seu corpo (body) deverá possuir um objeto com uma propriedade **mensagem** que deverá possuir como valor um texto explicando o motivo da falha.
+
+#### Exemplo de Requisição
+```javascript
+// PUT /contas/:numeroConta/usuario
+{
+    "nome": "Foo Bar 3",
+    "cpf": "99911122234",
+    "data_nascimento": "2021-03-15",
+    "telefone": "71999998888",
+    "email": "foo@bar3.com",
+    "senha": "12345"
+{
+```
+
+
+#### Exemplo de Resposta
+
+```javascript
+// HTTP Status 200 / 201 / 204
+// Sem conteúdo no corpo (body) da resposta
+```
+```javascript
+// HTTP Status 400 / 401 / 403 / 404
+{
+    "mensagem": "O CPF informado já existe cadastrado!"
+}
+```
