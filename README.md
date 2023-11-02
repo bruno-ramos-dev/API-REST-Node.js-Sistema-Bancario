@@ -359,3 +359,65 @@ Esse endpoint deverá realizar o saque de um valor em uma determinada conta banc
     "valor": 10000
 }
 ```
+
+### Transferir
+
+#### `POST` `/transacoes/transferir`
+
+Esse endpoint deverá permitir a transferência de recursos (dinheiro) de uma conta bancária para outra e registrar essa transação.
+
+-   Requisitos, **OBRIGATÓRIOS**:
+
+    -   Verificar se o número da conta de origem, de destino, senha da conta de origem e valor da transferência foram informados no body
+    -   Verificar se a conta bancária de origem informada existe
+    -   Verificar se a conta bancária de destino informada existe
+    -   Verificar se a senha informada é uma senha válida para a conta de origem informada
+    -   Verificar se há saldo disponível na conta de origem para a transferência
+    -   Subtrair o valor da transfência do saldo na conta de origem
+    -   Somar o valor da transferência no saldo da conta de destino
+
+-   **Requisição** - O corpo (body) deverá possuir um objeto com as seguintes propriedades (respeitando estes nomes):
+
+    -   numero_conta_origem
+    -   numero_conta_destino
+    -   valor
+    -   senha
+
+-   **Resposta**
+
+    Em caso de **sucesso**, não deveremos enviar conteúdo no corpo (body) da resposta.  
+    Em caso de **falha na validação**, a resposta deverá possuir ***status code*** apropriado, e em seu corpo (body) deverá possuir um objeto com uma propriedade **mensagem** que deverá possuir como valor um texto explicando o motivo da falha.
+
+#### Exemplo de Requisição
+```javascript
+// POST /transacoes/transferir
+{
+	"numero_conta_origem": "1",
+	"numero_conta_destino": "2",
+	"valor": 200,
+	"senha": "123456"
+}
+```
+#### Exemplo de Resposta
+
+```javascript
+// HTTP Status 200 / 201 / 204
+// Sem conteúdo no corpo (body) da resposta
+```
+```javascript
+// HTTP Status 400 / 401 / 403 / 404
+{
+    "mensagem": "Saldo insuficiente!"
+}
+```
+
+#### Exemplo do registro de uma transferência
+
+```javascript
+{
+    "data": "2023-11-02 23:40:35",
+    "numero_conta_origem": "1",
+    "numero_conta_destino": "2",
+    "valor": 10000
+}
+```
