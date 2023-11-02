@@ -30,7 +30,32 @@ const createBankAccount = async (req, res) => {
     }
 }
 
+const updateUserBankAccount = async (req, res) => {
+
+    const { numeroConta } = req.params
+    const { body } = req
+    const { senha } = req.body
+
+    try {
+
+        const account = arrayDatabase[0].contas.find(account => account.numero === numeroConta)
+
+        let encryptedPassword = await bcrypt.hash(senha, 10)
+
+        account.usuario = { ...body, senha: encryptedPassword }
+
+        let stringDatabase = JSON.stringify(arrayDatabase)
+        writeFile('src/data/database.json', stringDatabase)
+
+        return res.status(204).json()
+        
+    } catch (error) {
+        return res.status(400).json({ mensagem: `Erro no servidor ${error.message}` })
+    }
+}
+
 module.exports = {
     listBankAccounts, 
-    createBankAccount
+    createBankAccount, 
+    updateUserBankAccount
 }
