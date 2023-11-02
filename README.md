@@ -248,3 +248,58 @@ Esse endpoint exclui uma conta bancária existente.
     "mensagem": "A conta só pode ser removida se o saldo for zero!"
 }
 ```
+
+### Depositar
+
+#### `POST` `/transacoes/depositar`
+
+Esse endpoint deverá somar o valor do depósito ao saldo de uma conta válida e registrar essa transação.
+
+-   Requisitos, **OBRIGATÓRIOS**:
+
+    -   Verificar se o numero da conta e o valor do deposito foram informados no body
+    -   Verificar se a conta bancária informada existe
+    -   Não permitir depósitos com valores negativos ou zerados
+    -   Somar o valor de depósito ao saldo da conta encontrada
+
+-   **Requisição** - O corpo (body) deverá possuir um objeto com as seguintes propriedades (respeitando estes nomes):
+
+    -   numero_conta
+    -   valor
+
+-   **Resposta**
+
+    Em caso de **sucesso**, não deveremos enviar conteúdo no corpo (body) da resposta.  
+    Em caso de **falha na validação**, a resposta deverá possuir ***status code*** apropriado, e em seu corpo (body) deverá possuir um objeto com uma propriedade **mensagem** que deverá possuir como valor um texto explicando o motivo da falha.
+
+#### Exemplo de Requisição
+```javascript
+// POST /transacoes/depositar
+{
+	"numero_conta": "1",
+	"valor": 1900
+}
+```
+
+#### Exemplo de Resposta
+
+```javascript
+// HTTP Status 200 / 201 / 204
+// Sem conteúdo no corpo (body) da resposta
+```
+```javascript
+// HTTP Status 400 / 401 / 403 / 404
+{
+    "mensagem": "O número da conta e o valor são obrigatórios!"
+}
+```
+
+#### Exemplo do registro de um depósito
+
+```javascript
+{
+    "data": "2023-11-02 23:40:35",
+    "numero_conta": "1",
+    "valor": 10000
+}
+```
