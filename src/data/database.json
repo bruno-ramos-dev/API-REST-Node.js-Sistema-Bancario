@@ -6,9 +6,34 @@
       "agencia": "0001",
       "senha": "Cubos123Bank"
     },
-    "contas": [],
-    "saques": [],
-    "depositos": [],
+    "contas": [
+      {
+        "numero": "10ebc867-783a-4245-aea9-bb1ba17a9271",
+        "saldo": 0,
+        "usuario": {
+          "nome": "Foo Bar 99",
+          "cpf": "00011122234",
+          "data_nascimento": "2021-03-15",
+          "telefone": "71999998888",
+          "email": "foo@bar99.com",
+          "senha": "$2b$10$MzE9s095QUyIL7VZtPSUYuylwKe1I10eQE/g7FN27WkaqOTbrvA96"
+        }
+      }
+    ],
+    "saques": [
+      {
+        "date": "2023-11-02 17:40:12",
+        "numero_conta": "10ebc867-783a-4245-aea9-bb1ba17a9271",
+        "valor": 100
+      }
+    ],
+    "depositos": [
+      {
+        "date": "2023-11-02 17:39:57",
+        "numero_conta": "10ebc867-783a-4245-aea9-bb1ba17a9271",
+        "valor": 100
+      }
+    ],
     "transferencias": []
   }
 ]

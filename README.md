@@ -303,3 +303,59 @@ Esse endpoint deverá somar o valor do depósito ao saldo de uma conta válida e
     "valor": 10000
 }
 ```
+
+### Sacar
+
+#### `POST` `/transacoes/sacar`
+
+Esse endpoint deverá realizar o saque de um valor em uma determinada conta bancária e registrar essa transação.
+
+-   Requisitos, **OBRIGATÓRIOS**:
+
+    -   Verificar se o numero da conta, o valor do saque e a senha foram informados no body
+    -   Verificar se a conta bancária informada existe
+    -   Verificar se a senha informada é uma senha válida para a conta informada
+    -   Verificar se há saldo disponível para saque
+    -   Subtrair o valor sacado do saldo da conta encontrada
+
+-   **Requisição** - O corpo (body) deverá possuir um objeto com as seguintes propriedades (respeitando estes nomes):
+
+    -   numero_conta
+    -   valor
+    -   senha
+
+-   **Resposta**
+
+    Em caso de **sucesso**, não deveremos enviar conteúdo no corpo (body) da resposta.  
+    Em caso de **falha na validação**, a resposta deverá possuir ***status code*** apropriado, e em seu corpo (body) deverá possuir um objeto com uma propriedade **mensagem** que deverá possuir como valor um texto explicando o motivo da falha.
+
+#### Exemplo de Requisição
+```javascript
+// POST /transacoes/sacar
+{
+	"numero_conta": "1",
+	"valor": 1900,
+    "senha": "123456"
+}
+```
+#### Exemplo de Resposta
+```javascript
+// HTTP Status 200 / 201 / 204
+// Sem conteúdo no corpo (body) da resposta
+```
+```javascript
+// HTTP Status 400 / 401 / 403 / 404
+{
+    "mensagem": "O valor não pode ser menor que zero!"
+}
+```
+
+#### Exemplo do registro de um saque
+
+```javascript
+{
+    "data": "2023-11-02 23:40:35",
+    "numero_conta": "1",
+    "valor": 10000
+}
+```
