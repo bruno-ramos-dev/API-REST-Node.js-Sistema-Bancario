@@ -1,5 +1,5 @@
-const { v4: uuidv4 } = require('uuid')
 const bcrypt = require('bcrypt')
+const { v4: uuidv4 } = require('uuid')
 const { readFileAndConvertJsonToArray, writeFile } = require('../utils/handleFile')
 
 let arrayDatabase = readFileAndConvertJsonToArray('src/data/database.json')
@@ -26,7 +26,7 @@ const createBankAccount = async (req, res) => {
         return res.status(201).json()
         
     } catch (error) {
-        return res.status(400).json({ mensagem: `Erro no servidor ${error.message}` })
+        return res.status(500).json({ mensagem: `Erro no servidor ${error.message}` })
     }
 }
 
@@ -50,7 +50,7 @@ const updateUserBankAccount = async (req, res) => {
         return res.status(204).json()
         
     } catch (error) {
-        return res.status(400).json({ mensagem: `Erro no servidor ${error.message}` })
+        return res.status(500).json({ mensagem: `Erro no servidor ${error.message}` })
     }
 }
 
@@ -72,7 +72,20 @@ const deleteBankAccount = async (req, res) => {
         return res.status(204).json()
         
     } catch (error) {
-        return res.status(400).json({ mensagem: `Erro no servidor ${error.message}` })
+        return res.status(500).json({ mensagem: `Erro no servidor ${error.message}` })
+    }
+}
+
+const balance = async (req, res) => {
+
+    try {
+
+        const { account } = req
+        const balance = { saldo: account.saldo}
+        return res.json(balance)
+        
+    } catch (error) {
+        return res.status(500).json({ mensagem: `Erro no servidor ${error.message}` })
     }
 }
 
@@ -80,5 +93,6 @@ module.exports = {
     listBankAccounts, 
     createBankAccount, 
     updateUserBankAccount, 
-    deleteBankAccount
+    deleteBankAccount, 
+    balance
 }

@@ -421,3 +421,40 @@ Esse endpoint deverá permitir a transferência de recursos (dinheiro) de uma co
     "valor": 10000
 }
 ```
+
+### Saldo
+
+#### `GET` `/contas/saldo?numero_conta=123&senha=123`
+
+Esse endpoint deverá retornar o saldo de uma conta bancária.
+
+-   Requisitos, **OBRIGATÓRIOS**:
+
+    -   Verificar se o numero da conta e a senha foram informadas (passado como query params na url)
+    -   Verificar se a conta bancária informada existe
+    -   Verificar se a senha informada é uma senha válida
+    -   Exibir o saldo da conta bancária em questão
+
+-   **Requisição** - query params
+
+    -   numero_conta
+    -   senha
+
+-   **Resposta**
+
+    -   Saldo da conta
+
+#### Exemplo de Resposta
+
+```javascript
+// HTTP Status 200 / 201 / 204
+{
+    "saldo": 13000
+}
+```
+```javascript
+// HTTP Status 400 / 401 / 403 / 404
+{
+    "mensagem": "Conta bancária não encontada!"
+}
+```

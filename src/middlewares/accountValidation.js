@@ -1,3 +1,4 @@
+const bcrypt = require('bcrypt')
 const { readFileAndConvertJsonToArray } = require('../utils/handleFile')
 
 const arrayDatabase = readFileAndConvertJsonToArray('src/data/database.json')
@@ -29,10 +30,10 @@ const uniqueEmailValidation = (req, res, next) => {
     next()
 }
 
-const validAccountCpfAndEmail = (req, res, next) => {
+const validateAccountCpfAndEmailPassingByBodyAndParams = (req, res, next) => {
 
     const { numeroConta } = req.params
-    const { cpf, email, numero_conta, numero_conta_origem, numero_conta_destino } = req.body
+    let { cpf, email, numero_conta } = req.body
 
     let account = arrayDatabase[0].contas.find(account => account.numero === (numeroConta ?? numero_conta))
     if (!account) return res.status(404).json({ mensagem: 'Conta não encontrada em nosso banco de dados' })
@@ -52,9 +53,30 @@ const validAccountCpfAndEmail = (req, res, next) => {
     next()
 }
 
+const validateAccountAndPasswordPassingByQuery = async (req, res, next) => {
+
+    try {
+
+        const { numero_conta, senha } = req.query
+
+        let account = arrayDatabase[0].contas.find(account => account.numero === numero_conta)
+        if (!account) return res.status(404).json({ mensagem: 'Conta não encontrada em nosso banco de dados' })
+
+        const validPassword = await bcrypt.compare(senha, account.usuario.senha)
+        if (!validPassword) return res.status(403).json({ mensagem: 'Senha incorreta! Tente novamente.' })
+
+        req.account = account
+        next()
+        
+    } catch (error) {
+        return res.status(500).json({ mensagem: `Erro no servidor ${error.message}` })
+    }
+} 
+
 module.exports = {
     passwordValidation, 
     uniqueCpfValidation, 
     uniqueEmailValidation, 
-    validAccountCpfAndEmail
+    validateAccountCpfAndEmailPassingByBodyAndParams, 
+    validateAccountAndPasswordPassingByQuery
 }
