@@ -1,6 +1,6 @@
 const { Router } = require('express')
 const { passwordValidation, uniqueCpfValidation, uniqueEmailValidation, validateAccountCpfAndEmailPassingByBodyAndParams, validateAccountAndPasswordPassingByQuery } = require('../middlewares/accountValidation')
-const { listBankAccounts, createBankAccount, updateUserBankAccount, deleteBankAccount, balance } = require('../controllers/accountController')
+const { listBankAccounts, createBankAccount, updateUserBankAccount, deleteBankAccount, balance, invoice } = require('../controllers/accountController')
 const { validationRequisitionBody } = require('../middlewares/bodyValidation')
 const { validationRequisitionQuery } = require('../middlewares/queryValidation')
 const accountSchema = require('../schemas/accountSchema')
@@ -14,5 +14,6 @@ routes.put('/:numeroConta/usuario', validationRequisitionBody(accountSchema), va
 routes.delete('/:numeroConta', validateAccountCpfAndEmailPassingByBodyAndParams, deleteBankAccount)
 
 routes.get('/saldo', validationRequisitionQuery(balanceSchema), validateAccountAndPasswordPassingByQuery, balance)
+routes.get('/extrato', validationRequisitionQuery(balanceSchema), validateAccountAndPasswordPassingByQuery, invoice)
 
 module.exports = routes

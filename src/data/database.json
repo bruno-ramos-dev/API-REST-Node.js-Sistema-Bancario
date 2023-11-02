@@ -9,7 +9,7 @@
     "contas": [
       {
         "numero": "e9dcd8d3-5b0b-49b2-b383-185ac7de84eb",
-        "saldo": 600,
+        "saldo": 950,
         "usuario": {
           "nome": "Foo Bar",
           "cpf": "00011122232",
@@ -21,7 +21,7 @@
       },
       {
         "numero": "beabe7aa-9a6a-4c6b-a4ba-86e17a9a8b15",
-        "saldo": 200,
+        "saldo": 100,
         "usuario": {
           "nome": "Foo Bar 2",
           "cpf": "00011122231",
@@ -42,6 +42,16 @@
         "data": "2023-11-02 18:09:04",
         "numero_conta": "e9dcd8d3-5b0b-49b2-b383-185ac7de84eb",
         "valor": 100
+      },
+      {
+        "data": "2023-11-02 19:53:49",
+        "numero_conta": "e9dcd8d3-5b0b-49b2-b383-185ac7de84eb",
+        "valor": 15
+      },
+      {
+        "data": "2023-11-02 19:53:59",
+        "numero_conta": "e9dcd8d3-5b0b-49b2-b383-185ac7de84eb",
+        "valor": 10
       }
     ],
     "depositos": [
@@ -49,6 +59,11 @@
         "data": "2023-11-02 18:08:26",
         "numero_conta": "e9dcd8d3-5b0b-49b2-b383-185ac7de84eb",
         "valor": 500
+      },
+      {
+        "data": "2023-11-02 19:53:31",
+        "numero_conta": "e9dcd8d3-5b0b-49b2-b383-185ac7de84eb",
+        "valor": 275
       }
     ],
     "transferencias": [
@@ -57,6 +72,18 @@
         "numero_conta_origem": "e9dcd8d3-5b0b-49b2-b383-185ac7de84eb",
         "numero_conta_destino": "beabe7aa-9a6a-4c6b-a4ba-86e17a9a8b15",
         "valor": 200
+      },
+      {
+        "data": "2023-11-02 19:53:00",
+        "numero_conta_origem": "beabe7aa-9a6a-4c6b-a4ba-86e17a9a8b15",
+        "numero_conta_destino": "e9dcd8d3-5b0b-49b2-b383-185ac7de84eb",
+        "valor": 35
+      },
+      {
+        "data": "2023-11-02 19:53:04",
+        "numero_conta_origem": "beabe7aa-9a6a-4c6b-a4ba-86e17a9a8b15",
+        "numero_conta_destino": "e9dcd8d3-5b0b-49b2-b383-185ac7de84eb",
+        "valor": 65
       }
     ]
   }
