@@ -214,3 +214,37 @@ Esse endpoint atualiza apenas os dados do usuário de uma conta bancária.
     "mensagem": "O CPF informado já existe cadastrado!"
 }
 ```
+
+### Excluir Conta
+
+#### `DELETE` `/contas/:numeroConta`
+
+Esse endpoint exclui uma conta bancária existente.
+
+-   Requisitos, **OBRIGATÓRIOS**:
+
+    -   Verificar se o numero da conta passado como parametro na URL é válido
+    -   Permitir excluir uma conta bancária apenas se o saldo for 0 (zero)
+    -   Remover a conta do objeto de persistência de dados.
+
+-   **Requisição**
+
+    -   Numero da conta bancária (passado como parâmetro na rota)
+
+-   **Resposta**
+
+    Em caso de **sucesso**, não deveremos enviar conteúdo no corpo (body) da resposta.  
+    Em caso de **falha na validação**, a resposta deverá possuir ***status code*** apropriado, e em seu corpo (body) deverá possuir um objeto com uma propriedade **mensagem** que deverá possuir como valor um texto explicando o motivo da falha.
+
+#### Exemplo de Resposta
+
+```javascript
+// HTTP Status 200 / 201 / 204
+// Sem conteúdo no corpo (body) da resposta
+```
+```javascript
+// HTTP Status 400 / 401 / 403 / 404
+{
+    "mensagem": "A conta só pode ser removida se o saldo for zero!"
+}
+```
