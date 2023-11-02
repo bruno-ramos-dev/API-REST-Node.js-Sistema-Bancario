@@ -32,9 +32,9 @@ const uniqueEmailValidation = (req, res, next) => {
 const validAccountCpfAndEmail = (req, res, next) => {
 
     const { numeroConta } = req.params
-    const { cpf, email } = req.body
+    const { cpf, email, numero_conta } = req.body
 
-    let account = arrayDatabase[0].contas.find(account => account.numero === numeroConta)
+    let account = arrayDatabase[0].contas.find(account => account.numero === (numeroConta ?? numero_conta))
     if (!account) return res.status(404).json({ mensagem: 'Conta não encontrada em nosso banco de dados' })
 
     if (cpf !== account.usuario.cpf) {

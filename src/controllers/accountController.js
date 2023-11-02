@@ -61,7 +61,7 @@ const deleteBankAccount = async (req, res) => {
     try {
 
         const account = arrayDatabase[0].contas.find(account => account.numero === numeroConta)
-        if (account.saldo !== 0) return res.status(403).json({ mensagem: 'A sua conta possui saldo. Saque todo o valor antes de excluir a conta!' })
+        if (account.saldo != 0) return res.status(403).json({ mensagem: 'A sua conta possui saldo. Saque todo o valor antes de excluir a conta!' })
 
         const filteredDatabase = arrayDatabase[0].contas.filter(account => account.numero !== numeroConta)
         arrayDatabase[0].contas = filteredDatabase
