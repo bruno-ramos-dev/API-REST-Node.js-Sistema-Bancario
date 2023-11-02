@@ -27,7 +27,7 @@ const deposit = (req, res) => {
         return res.status(204).json()
         
     } catch (error) {
-        return res.status(400).json({ mensagem: `Erro no servidor ${error.message}` })
+        return res.status(500).json({ mensagem: `Erro no servidor ${error.message}` })
     }
 }
 
@@ -59,7 +59,7 @@ const withdraw = async (req, res) => {
         return res.status(204).json()
         
     } catch (error) {
-        return res.status(400).json({ mensagem: `Erro no servidor ${error.message}` })
+        return res.status(500).json({ mensagem: `Erro no servidor ${error.message}` })
     }
 }
 
@@ -98,7 +98,7 @@ const transfer = async (req, res) => {
         return res.status(204).json()
         
     } catch (error) {
-        return res.status(400).json({ mensagem: `Erro no servidor ${error.message}` })
+        return res.status(500).json({ mensagem: `Erro no servidor ${error.message}` })
     }
 }
 

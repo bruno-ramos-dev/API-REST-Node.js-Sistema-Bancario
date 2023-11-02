@@ -1,14 +1,18 @@
 const { Router } = require('express')
-const { passwordValidation, uniqueCpfValidation, uniqueEmailValidation, validAccountCpfAndEmail } = require('../middlewares/accountValidation')
-const { listBankAccounts, createBankAccount, updateUserBankAccount, deleteBankAccount } = require('../controllers/accountController')
+const { passwordValidation, uniqueCpfValidation, uniqueEmailValidation, validateAccountCpfAndEmailPassingByBodyAndParams, validateAccountAndPasswordPassingByQuery } = require('../middlewares/accountValidation')
+const { listBankAccounts, createBankAccount, updateUserBankAccount, deleteBankAccount, balance } = require('../controllers/accountController')
 const { validationRequisitionBody } = require('../middlewares/bodyValidation')
+const { validationRequisitionQuery } = require('../middlewares/queryValidation')
 const accountSchema = require('../schemas/accountSchema')
+const balanceSchema = require('../schemas/balanceSchema')
 
 const routes = Router()
 
 routes.get('/', passwordValidation, listBankAccounts)
 routes.post('/', validationRequisitionBody(accountSchema), uniqueCpfValidation, uniqueEmailValidation, createBankAccount)
-routes.put('/:numeroConta/usuario', validationRequisitionBody(accountSchema), validAccountCpfAndEmail, updateUserBankAccount)
-routes.delete('/:numeroConta', validAccountCpfAndEmail, deleteBankAccount)
+routes.put('/:numeroConta/usuario', validationRequisitionBody(accountSchema), validateAccountCpfAndEmailPassingByBodyAndParams, updateUserBankAccount)
+routes.delete('/:numeroConta', validateAccountCpfAndEmailPassingByBodyAndParams, deleteBankAccount)
+
+routes.get('/saldo', validationRequisitionQuery(balanceSchema), validateAccountAndPasswordPassingByQuery, balance)
 
 module.exports = routes
